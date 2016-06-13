@@ -1,5 +1,4 @@
 apply plugin: 'com.android.application'
-apply plugin: 'com.google.gms.google-services'
 android {
     compileSdkVersion 23
     buildToolsVersion "23.0.3"
@@ -29,18 +28,17 @@ dependencies {
     /*Support design library*/
 
     /* Firebase UI */
-    
 
-    
-
-
-
-    compile 'com.android.support:appcompat-v7:23.0.0'
-    compile 'com.android.support:design:23.0.0'
-    compile 'com.firebase:firebase-client-android:2.3.1'
+    compile 'com.android.support:appcompat-v7:23.4.0'
+    compile 'com.android.support:design:23.4.0'
+   compile 'com.firebase:firebase-client-android:2.3.1'
+//    compile 'com.google.firebase:firebase-core:9.0.2'
     compile 'com.firebaseui:firebase-ui:0.2.2'
 
-    compile 'com.google.android.gms:play-services-auth:8.3.0'
-
-
+    compile 'com.google.android.gms:play-services-auth:9.0.2'
+    compile 'com.google.firebase:firebase-messaging:9.0.2'
 }
+apply plugin: 'com.google.gms.google-services'
+
+
+

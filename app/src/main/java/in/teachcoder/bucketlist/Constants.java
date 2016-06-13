@@ -7,6 +7,7 @@ public class Constants {
     public static final String FIREBASE_LOCATION_BUCKETLIST_CATEGORY = "bucketListCategory";
     public static final String FIREBASE_LOCATION_BUCKETLIST_ITEMS = "bucketListItems";
     public static final String FIREBASE_LOCATION_BUCKETLIST_USERS= "users";
+    public static final String FIREBASE_LOCATION_BUCKETLIST_MILESTONES= "milestones";
 
 
     public static final String FIREBASE_BASE_URL = "https://buckelist123.firebaseio.com/";

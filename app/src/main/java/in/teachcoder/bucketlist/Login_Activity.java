@@ -46,6 +46,7 @@ public class Login_Activity extends AppCompatActivity implements GoogleApiClient
     Button signIn;
     TextView signUp;
     private Firebase mFirebase;
+    private Firebase.AuthStateListener mAuthStateListener;
      String updatedEmailId;
 
     GoogleSignInOptions gso;
@@ -88,6 +89,13 @@ public class Login_Activity extends AppCompatActivity implements GoogleApiClient
             @Override
             public void onClick(View v) {
                 signInWithGoogleButton();
+            }
+        });
+
+        signUp.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                onSignUpPressed();
             }
         });
 
@@ -290,5 +298,35 @@ public class Login_Activity extends AppCompatActivity implements GoogleApiClient
         };
 
         task.execute();
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        mAuthStateListener = new Firebase.AuthStateListener(){
+
+            @Override
+            public void onAuthStateChanged(AuthData authData) {
+                authenticationDialog.dismiss();
+                if(authData!=null)
+                {
+                    Intent intent = new Intent(Login_Activity.this,MainActivity.class);
+                    intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_NEW_TASK);
+                    startActivity(intent);
+                    finish();
+
+                }
+            }
+        };
+
+        mFirebase.addAuthStateListener((Firebase.AuthStateListener) mAuthStateListener);
+
+    }
+
+
+    @Override
+    protected void onPause() {
+        super.onPause();
+        mFirebase.removeAuthStateListener(mAuthStateListener);
     }
 }

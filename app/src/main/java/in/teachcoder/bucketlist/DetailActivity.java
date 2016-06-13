@@ -2,11 +2,13 @@ package in.teachcoder.bucketlist;
 
 import android.app.AlertDialog;
 import android.content.DialogInterface;
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v7.app.AppCompatActivity;
 import android.view.LayoutInflater;
 import android.view.View;
+import android.widget.AdapterView;
 import android.widget.EditText;
 import android.widget.ListView;
 
@@ -20,48 +22,76 @@ import java.util.HashMap;
 
 import in.teachcoder.bucketlist.models.BucketCategory;
 import in.teachcoder.bucketlist.models.BucketCategoryItem;
+import in.teachcoder.bucketlist.models.ITEMs;
 
 public class DetailActivity extends AppCompatActivity {
     ListView itemsList;
     FloatingActionButton addBucketItem;
     Firebase activeCategoryListRef, itemsRef;
-    String owner;
+    String owner,listId,user;
     ValueEventListener eventListener;
-    CategoriesListAdapter adapter;
+//    CategoriesListAdapter adapter;
+    ItemListAdapter adapter;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_detail);
         initializeViews();
-        String listId = getIntent().getStringExtra(Constants.KEY_ID);
-
+        Firebase.setAndroidContext(this);
+         listId = getIntent().getStringExtra(Constants.KEY_ID);
+         user = getIntent().getStringExtra("user");
 
         activeCategoryListRef = new Firebase(Constants.FIREBASE_CATEGORIES_URL).child(listId);
         itemsRef = new Firebase(Constants.FIREBASE_ITEMS_URL).child(listId);
-        adapter = new CategoriesListAdapter(this, BucketCategory.class, itemsRef);
-
+//        adapter = new CategoriesListAdapter(this, BucketCategory.class, itemsRef);
+          adapter = new ItemListAdapter(this, ITEMs.class,itemsRef);
         eventListener = activeCategoryListRef.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
                 BucketCategory category = dataSnapshot.getValue(BucketCategory.class);
-                if (category != null)
+                if (category != null && category.getOwner().equals(user))
                     setTitle(category.getTitle());
             }
+
+
+
 
             @Override
             public void onCancelled(FirebaseError firebaseError) {
 
             }
         });
+
+
         addBucketItem.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                showDialog();
+//                showDialog();
+
+                Intent i = new Intent(DetailActivity.this,Add_Item_Activity.class);
+                i.putExtra(Constants.KEY_ID,listId );
+                i.putExtra("coming_from","DetailActivity");
+
+
+                startActivity(i);
             }
         });
 
         itemsList.setAdapter(adapter);
 
+        itemsList.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+            String key =   adapter.getRef(position).getKey();
+             Intent i =new Intent(DetailActivity.this,Item_Details_Activity.class);
+                i.putExtra(Constants.KEY_ID,listId );
+                i.putExtra("Item_key",key);
+             startActivity(i);
+
+
+
+            }
+        });
 
     }
 
@@ -79,7 +109,7 @@ public class DetailActivity extends AppCompatActivity {
             public void onClick(DialogInterface dialog, int which) {
                 // send to firebase
                 String item = itemName.getText().toString();
-                owner = "Anon";
+                owner = user;
                 Firebase newRef = itemsRef.push();
                 HashMap<String, Object> timeStampCreatedAt = new HashMap<String, Object>();
                 timeStampCreatedAt.put(Constants.FIREBASE_TIMESTAMP_PROPERTY, ServerValue.TIMESTAMP);

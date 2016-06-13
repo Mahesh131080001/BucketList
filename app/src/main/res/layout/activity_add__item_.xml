@@ -1,0 +1,100 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:layout_marginLeft="10dp"
+    android:layout_marginRight="10dp"
+    tools:context="in.teachcoder.bucketlist.Item_Details_Activity">
+    <TextView
+        android:textColor="@android:color/holo_red_light"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/ADD_Title_text_add"
+        android:text="TItle"
+        android:textSize="25dp"
+        android:textStyle="bold"
+
+        />
+
+    <EditText
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textSize="35dp"
+        android:textColor="@android:color/holo_red_light"
+        android:id="@+id/ADD_edit_title"/>
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Should be done upto"
+        android:textSize="20dp"
+        android:textStyle="bold"
+        android:paddingTop="10dp"
+        android:textColor="@android:color/holo_red_light"
+        android:id="@+id/ADD_date_title_text"
+        />
+
+
+
+    <EditText
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textSize="20dp"
+        android:hint="Enter the date here"
+        android:id="@+id/ADD_date"
+        />
+
+    <TextView
+        android:textColor="@android:color/holo_red_light"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Priority"
+        android:textStyle="bold"
+        android:layout_marginTop="20dp"
+        android:paddingTop="5dp"
+        android:textSize="20dp"
+        android:id="@+id/ADD_priority_title_text"
+        />
+    <EditText
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+
+android:textSize="20dp"
+        android:hint="Enter Priority high/medium/low"
+        android:id="@+id/ADD_priority"
+        />
+
+    <TextView
+        android:layout_marginTop="20dp"
+        android:textColor="@android:color/holo_red_light"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Details"
+        android:paddingTop="10dp"
+        android:textStyle="bold"
+        android:textSize="20dp"
+        android:id="@+id/ADD_detail_title_text"/>
+
+    <EditText
+        android:layout_width="match_parent"
+        android:height="100dp"
+        android:background="@drawable/editext_border"
+        android:layout_height="wrap_content"
+
+
+        android:hint="Enter Deatils Here"
+        android:id="@+id/ADD_description"/>
+
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="SAVE"
+        android:textColor="@android:color/holo_blue_dark"
+        android:layout_gravity="right"
+        android:id="@+id/save_button"
+        android:layout_marginTop="30dp"
+        />
+
+
+</LinearLayout>
