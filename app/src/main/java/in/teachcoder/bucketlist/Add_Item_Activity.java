@@ -10,6 +10,7 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.Toast;
 
 import com.firebase.client.DataSnapshot;
 import com.firebase.client.Firebase;
@@ -29,7 +30,7 @@ public class Add_Item_Activity extends AppCompatActivity {
     Firebase activeCategoryListRef, itemsRef, itemref,newref;
     SharedPreferences sp;
     String owner, MEncodedEmail, item_key;
-    String itemtitle, itemdate, itempriority, itemdetails;
+    String itemtitle, itemdate, itempriority, itemdetails,status;
     Button savebtn;
     String list_id;
 
@@ -85,6 +86,12 @@ public class Add_Item_Activity extends AppCompatActivity {
                     String ADD = "Add";
                      newref = itemsRef.push();
                     final String itemid = newref.getKey();
+                    if(title.getText().toString().equals(""))
+                    {
+//            Toast.makeText(this, "please provide Title", Toast.LENGTH_SHORT).show();
+                        title.setError("Title should not be empty");
+                        return;
+                    }
 
                     additem(ADD);
 
@@ -97,7 +104,7 @@ public class Add_Item_Activity extends AppCompatActivity {
                             Intent intent = new Intent(Add_Item_Activity.this,Add_Milestone_Activity.class);
                                   intent.putExtra("item_id",itemid);
                             startActivity(intent);
-                            // send to firebase
+                            finish();      // send to firebase
 
 
 
@@ -148,7 +155,23 @@ public class Add_Item_Activity extends AppCompatActivity {
         itempriority = priority.getText().toString();
         itemdetails = details.getText().toString();
 
-        ITEMs newItem = new ITEMs(itemtitle, itemdate, itempriority, itemdetails, owner);
+
+        if(itemdate.equals(""))
+        {
+            itemdate="Not Provided";
+        }
+        if(itempriority.equals(""))
+        {
+            itempriority="Not provided";
+
+        }
+        if(itemdetails.equals(""))
+        {
+            itempriority = "Not provided";
+        }
+        status="Incomplete";
+
+        ITEMs newItem = new ITEMs(itemtitle, itemdate, itempriority, itemdetails, owner,status);
 //
 //        String itemId = newRef.getKey();
 

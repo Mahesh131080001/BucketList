@@ -5,6 +5,7 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.Toast;
 
 import com.firebase.client.Firebase;
 
@@ -30,18 +31,32 @@ savebtn.setOnClickListener(new View.OnClickListener() {
     @Override
     public void onClick(View v) {
         additem();
+        finish();
     }
 });
 
 
+addanotherbtn.setOnClickListener(new View.OnClickListener() {
+    @Override
+    public void onClick(View v) {
+        if(title.getText().toString().equals(""))
+        {
+//             Toast.makeText(this, "please provide Title", Toast.LENGTH_SHORT).show();
+            title.setError("Title should not be empty");
+            return;
 
+        }
 
-
-
+        additem();
+        title.setText("");
+        deadline.setText("");
+        details.setText("");
 
 
     }
+});
 
+    }
 
     void initialize()
     {
@@ -61,12 +76,22 @@ savebtn.setOnClickListener(new View.OnClickListener() {
         details1 = details.getText().toString();
 
 
+        if(deadline1.equals(""))
+        {
+            deadline1="Not provided";
+
+        }
+        if(details1.equals(""))
+        {
+            details1 = "Not provided";
+        }
+
         Milestone mlstn = new Milestone(title1,deadline1,details1);
 
         milestoneref =new Firebase(Constants.FIREBASE_BASE_URL).child(Constants.FIREBASE_LOCATION_BUCKETLIST_MILESTONES).child(itemkey);
         milestone = milestoneref.push();
         milestone.setValue(mlstn);
-        finish();
+
     }
 
 }

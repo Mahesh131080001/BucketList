@@ -16,7 +16,15 @@
     android:layout_marginRight="10dp"
     android:textStyle="bold"
     />
-
+<TextView
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:text="Incomplete"
+    android:textSize="20dp"
+    android:textColor="@android:color/holo_red_dark"
+    android:layout_gravity="right"
+    android:id="@+id/item_details_status"
+    />
 
 
 
@@ -97,6 +105,28 @@
         />
     </RelativeLayout>
 
+<TextView
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:text="Milestones"
+    android:textColor="@android:color/holo_purple"
+    android:id="@+id/text_milestone"
+    android:textStyle="bold"
+    android:textSize="25dp"
+    android:layout_marginTop="5dp"
 
+    />
+    <ListView
+        android:layout_marginTop="5dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/list_milestones"
+
+        ></ListView>
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Mark As Completed"
+        android:id="@+id/complete_button"/>
 
 </LinearLayout>

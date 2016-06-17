@@ -9,6 +9,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.firebase.client.Firebase;
 import com.firebase.client.FirebaseError;
@@ -41,10 +42,38 @@ public class create_account extends AppCompatActivity {
         createaccountBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+
                 progressDialog.show();
                 useremail= email.getText().toString();
                 username =name.getText().toString();
                 userpasss = pass.getText().toString();
+
+                if(useremail.equals(""))
+                {
+                    email.setError("Email_id Should Not be Empty");
+                    return;
+
+                }
+                if(username.equals(""))
+                {
+                    name.setError("Username Should Not be Empty");
+                    return;
+
+                }
+                if(userpasss.equals(""))
+                {
+//                    Toast.makeText(create_account.this, "Please Choose your Pssword", Toast.LENGTH_SHORT).show();
+                    pass.setError("password should not be empty");
+                    return;
+
+                }
+                if(userpasss.length()<8)
+                {
+                    Toast.makeText(create_account.this, "Password should be atleast 8 characters", Toast.LENGTH_SHORT).show();
+                    return;
+
+                }
+
 
                ref.createUser(useremail, userpasss, new Firebase.ResultHandler() {
                    @Override

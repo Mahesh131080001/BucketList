@@ -5,22 +5,40 @@ package in.teachcoder.bucketlist.models;
  */
 public class ITEMs {
 
-    String title,date,priority,details,owner;
+    String title,date,priority,details,owner,status;
 
     public ITEMs()
     {
 
     }
 
-    public ITEMs(String title,String date,String priority,String details,String owner)
+    public ITEMs(String title,String date,String priority,String details,String owner,String status)
     {
         this.title=title;
         this.date=date;
         this.priority = priority;
         this.details =details;
         this.owner =owner;
+        this.status=status;
 
 
+
+    }
+
+    public String getStatus() {
+        return status;
+    }
+
+    public void setStatus(String status) {
+        this.status = status;
+    }
+
+    public String getOwner() {
+        return owner;
+    }
+
+    public void setOwner(String owner) {
+        this.owner = owner;
     }
 
     public String getTitle() {
